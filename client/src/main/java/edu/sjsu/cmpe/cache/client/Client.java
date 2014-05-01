@@ -25,6 +25,7 @@ public class Client {
 */        
        
         List<CacheServiceInterface> AvailableServers = new ArrayList<CacheServiceInterface>();
+        //adding server to the list
         AvailableServers.add(new DistributedCacheService("http://localhost:3000"));
         AvailableServers.add(new DistributedCacheService("http://localhost:3001"));
         AvailableServers.add(new DistributedCacheService("http://localhost:3002"));
@@ -34,19 +35,19 @@ public class Client {
         
           System.out.println("Sharding of key => value onto the servers");
           System.out.println("");
-          for(int key=1; key<=10; key++)	{
-          	int bucket = Hashing.consistentHash(Hashing.md5().hashString(Integer.toString(key)), AvailableServers.size());
-          	AvailableServers.get(bucket).put(key, Character.toString(Mappedvalues[key]));
-          	System.out.println("Key "+key+" with value "+Mappedvalues[key]+""
+          for(int i=1; i<=10; i++)	{
+          	int bucket = Hashing.consistentHash(Hashing.md5().hashString(Integer.toString(i)), AvailableServers.size());
+          	AvailableServers.get(bucket).put(i, Character.toString(Mappedvalues[i]));
+          	System.out.println("Key "+i+" with value "+Mappedvalues[i]+""
           			+ " is shaeded over localhost@300" +bucket);
           }
           
           System.out.println("");
           System.out.println("Getting keys => values from the servers");
           System.out.println("");
-          for(int key1=1; key1<=10; key1++)	{
-          	int bucket = Hashing.consistentHash(Hashing.md5().hashString(Integer.toString(key1)), AvailableServers.size());
-          	System.out.println("Key " +key1+ " with Value "+AvailableServers.get(bucket).get(key1)
+          for(int j=1; j<=10; j++)	{
+          	int bucket = Hashing.consistentHash(Hashing.md5().hashString(Integer.toString(j)), AvailableServers.size());
+          	System.out.println("Key " +j+ " with Value "+AvailableServers.get(bucket).get(j)
           			+ " is fetched from the server: localhost@300" +bucket);      			
           }
         
