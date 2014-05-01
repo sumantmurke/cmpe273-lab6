@@ -29,7 +29,7 @@ public class Client {
           for(int i=1; i<=10; i++)	{
           	int bucket = Hashing.consistentHash(Hashing.md5().hashString(Integer.toString(i)), AvailableServers.size());
           	AvailableServers.get(bucket).put(i, Character.toString(Mappedvalues[i]));
-          	System.out.println("Key "+i+" with value "+Mappedvalues[i]+""+ " is sharded over localhost@300" +bucket);
+          	System.out.println("Key "+i+" with value "+Mappedvalues[i]+""+ " is sharded over http://localhost:300" +bucket);
           }
           
           /*
@@ -41,7 +41,7 @@ public class Client {
           System.out.println("");
           for(int j=1; j<=10; j++)	{
           	int bucket = Hashing.consistentHash(Hashing.md5().hashString(Integer.toString(j)), AvailableServers.size());
-          	System.out.println("Key " +j+ " with Value "+AvailableServers.get(bucket).get(j)+ " is fetched from the server: localhost@300" +bucket);      			
+          	System.out.println("Key " +j+ " with Value "+AvailableServers.get(bucket).get(j)+ " is fetched from the server: http://localhost:300" +bucket);      			
           }
         
         
